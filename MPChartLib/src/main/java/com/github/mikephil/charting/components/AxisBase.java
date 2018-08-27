@@ -11,6 +11,8 @@ import com.github.mikephil.charting.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.RecursiveTask;
 
 /**
  * Base-class of all axes (previously called labels).
@@ -18,6 +20,8 @@ import java.util.List;
  * @author Philipp Jahoda
  */
 public abstract class AxisBase extends ComponentBase {
+
+    private static boolean parallelismEnabled = false;
 
     /**
      * custom formatter that is used instead of the auto-formatter if set
@@ -160,6 +164,14 @@ public abstract class AxisBase extends ComponentBase {
         this.mXOffset = Utils.convertDpToPixel(5f);
         this.mYOffset = Utils.convertDpToPixel(5f);
         this.mLimitLines = new ArrayList<LimitLine>();
+    }
+
+    public static boolean isParallelismEnabled() {
+        return parallelismEnabled;
+    }
+
+    public static void setParallelismEnabled(boolean parallelismEnabled) {
+        AxisBase.parallelismEnabled = parallelismEnabled;
     }
 
     /**
@@ -455,10 +467,52 @@ public abstract class AxisBase extends ComponentBase {
      *
      * @param enabled
      */
-    public void setDrawGridLinesBehindData(boolean enabled) { mDrawGridLinesBehindData = enabled; }
+    public void setDrawGridLinesBehindData(boolean enabled) {
+        mDrawGridLinesBehindData = enabled;
+    }
 
     public boolean isDrawGridLinesBehindDataEnabled() {
         return mDrawGridLinesBehindData;
+    }
+
+
+    private static ForkJoinPool executor = new ForkJoinPool(4);
+
+
+    class LongestLabel extends RecursiveTask<String> {
+
+        private final float[] values;
+        private final int start;
+        private final int end;
+
+        LongestLabel(float[] values, int start, int end) {
+            this.values = values;
+            this.start = start;
+            this.end = end;
+        }
+
+        @Override
+        protected String compute() {
+
+            int sliceLength = (end - start) + 1;
+            if (sliceLength == 1) {
+                return getFormattedLabel(start);
+            } else if (sliceLength == 2) {
+                // 1 - 0 + 1 = 2
+                String lowerStr = getFormattedLabel(start);
+                String upperStr = getFormattedLabel(end);
+                return (lowerStr.length() > upperStr.length()) ? lowerStr : upperStr;
+            } else {
+                LongestLabel upper = new LongestLabel(values, start, start + (sliceLength / 2) - 1);
+                LongestLabel lower = new LongestLabel(values, start + (sliceLength / 2), end);
+                lower.fork();
+                upper.fork();
+                String lowerStr = lower.join();
+                String upperStr = upper.join();
+                return (lowerStr.length() > upperStr.length()) ? lowerStr : upperStr;
+            }
+        }
+
     }
 
     /**
@@ -471,13 +525,16 @@ public abstract class AxisBase extends ComponentBase {
 
         String longest = "";
 
-        for (int i = 0; i < mEntries.length; i++) {
-            String text = getFormattedLabel(i);
+        if (parallelismEnabled) {
+            longest = executor.invoke(new LongestLabel(mEntries, 0, mEntries.length - 1));
+        } else {
+            for (int i = 0; i < mEntries.length; i++) {
+                String text = getFormattedLabel(i);
 
-            if (text != null && longest.length() < text.length())
-                longest = text;
+                if (text != null && longest.length() < text.length())
+                    longest = text;
+            }
         }
-
         return longest;
     }
 
@@ -515,7 +572,7 @@ public abstract class AxisBase extends ComponentBase {
 
         if (mAxisValueFormatter == null ||
                 (mAxisValueFormatter instanceof DefaultAxisValueFormatter &&
-                        ((DefaultAxisValueFormatter)mAxisValueFormatter).getDecimalDigits() != mDecimals))
+                        ((DefaultAxisValueFormatter) mAxisValueFormatter).getDecimalDigits() != mDecimals))
             mAxisValueFormatter = new DefaultAxisValueFormatter(mDecimals);
 
         return mAxisValueFormatter;
@@ -752,32 +809,28 @@ public abstract class AxisBase extends ComponentBase {
     /**
      * Gets extra spacing for `axisMinimum` to be added to automatically calculated `axisMinimum`
      */
-    public float getSpaceMin()
-    {
+    public float getSpaceMin() {
         return mSpaceMin;
     }
 
     /**
      * Sets extra spacing for `axisMinimum` to be added to automatically calculated `axisMinimum`
      */
-    public void setSpaceMin(float mSpaceMin)
-    {
+    public void setSpaceMin(float mSpaceMin) {
         this.mSpaceMin = mSpaceMin;
     }
 
     /**
      * Gets extra spacing for `axisMaximum` to be added to automatically calculated `axisMaximum`
      */
-    public float getSpaceMax()
-    {
+    public float getSpaceMax() {
         return mSpaceMax;
     }
 
     /**
      * Sets extra spacing for `axisMaximum` to be added to automatically calculated `axisMaximum`
      */
-    public void setSpaceMax(float mSpaceMax)
-    {
+    public void setSpaceMax(float mSpaceMax) {
         this.mSpaceMax = mSpaceMax;
     }
 }
