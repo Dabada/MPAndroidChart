@@ -40,7 +40,7 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
     protected float mXMin = Float.MAX_VALUE;
 
 
-    protected boolean calcMinMaxEnabled = false;
+    protected boolean calcMinMaxEnabled = true;
 
     /**
      * Creates a new DataSet object with the given values (entries) it represents. Also, a
