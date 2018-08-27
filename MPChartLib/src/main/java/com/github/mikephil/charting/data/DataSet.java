@@ -40,6 +40,8 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
     protected float mXMin = Float.MAX_VALUE;
 
 
+    protected boolean calcMinMaxEnabled = false;
+
     /**
      * Creates a new DataSet object with the given values (entries) it represents. Also, a
      * label that describes the DataSet can be specified. The label can also be
@@ -58,10 +60,34 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
         calcMinMax();
     }
 
+    public boolean isCalcMinMaxEnabled() {
+        return calcMinMaxEnabled;
+    }
+
+    public void setCalcMinMaxEnabled(boolean calcMinMaxEnabled) {
+        this.calcMinMaxEnabled = calcMinMaxEnabled;
+    }
+
+    public void setYMax(float mYMax) {
+        this.mYMax = mYMax;
+    }
+
+    public void setYMin(float mYMin) {
+        this.mYMin = mYMin;
+    }
+
+    public void setXMax(float mXMax) {
+        this.mXMax = mXMax;
+    }
+
+    public void setXMin(float mXMin) {
+        this.mXMin = mXMin;
+    }
+
     @Override
     public void calcMinMax() {
 
-        if (mValues == null || mValues.isEmpty())
+        if (!calcMinMaxEnabled || mValues == null || mValues.isEmpty())
             return;
 
         mYMax = -Float.MAX_VALUE;
@@ -77,7 +103,7 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
     @Override
     public void calcMinMaxY(float fromX, float toX) {
 
-        if (mValues == null || mValues.isEmpty())
+        if (!calcMinMaxEnabled || mValues == null || mValues.isEmpty())
             return;
 
         mYMax = -Float.MAX_VALUE;
@@ -100,7 +126,7 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
      */
     protected void calcMinMax(T e) {
 
-        if (e == null)
+        if (!calcMinMaxEnabled || e == null)
             return;
 
         calcMinMaxX(e);
