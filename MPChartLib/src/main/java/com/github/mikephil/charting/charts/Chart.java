@@ -72,6 +72,8 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
      */
     protected boolean mLogEnabled = false;
 
+    protected boolean computePerfEnabled = false;
+
     /**
      * object that holds all data that was originally set for the chart, before
      * it was modified or any filtering algorithms had been applied
@@ -199,6 +201,14 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
     public Chart(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
+    }
+
+    public boolean isComputePerfEnabled() {
+        return computePerfEnabled;
+    }
+
+    public void setComputePerfEnabled(boolean computePerfEnabled) {
+        this.computePerfEnabled = computePerfEnabled;
     }
 
     /**

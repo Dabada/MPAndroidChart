@@ -10,6 +10,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -180,8 +181,10 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
     }
 
     // for performance tracking
+    private long drawTime = 0;
     private long totalTime = 0;
     private long drawCycles = 0;
+    private long averageTime =0;
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -190,7 +193,7 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
         if (mData == null)
             return;
 
-        long starttime = System.currentTimeMillis();
+        long starttime = SystemClock.elapsedRealtime();
 
         // execute all drawing commands
         drawGridBackground(canvas);
@@ -284,14 +287,37 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
 
         drawMarkers(canvas);
 
-        if (mLogEnabled) {
-            long drawtime = (System.currentTimeMillis() - starttime);
-            totalTime += drawtime;
+
+        if (computePerfEnabled){
+            drawTime = (SystemClock.elapsedRealtime() - starttime);
+            totalTime += drawTime;
             drawCycles += 1;
-            long average = totalTime / drawCycles;
-            Log.i(LOG_TAG, "Drawtime: " + drawtime + " ms, average: " + average + " ms, cycles: "
-                    + drawCycles);
+            averageTime = totalTime / drawCycles;
+
+            if (mLogEnabled) {
+                mDescription.setText(String.valueOf(averageTime) + " ms");
+                drawDescription(canvas);
+
+                Log.i(LOG_TAG, "Drawtime: " + drawTime + " ms, average: " + averageTime + " ms, cycles: "
+                        + drawCycles);
+            }
         }
+    }
+
+    public long getAverageTime() {
+        return averageTime;
+    }
+
+    public long getDrawTime() {
+        return drawTime;
+    }
+
+    public long getDrawCycles() {
+        return drawCycles;
+    }
+
+    public void setDrawCycles(long drawCycles) {
+        this.drawCycles = drawCycles;
     }
 
     /**
@@ -1571,6 +1597,8 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
     public float getYChartMin() {
         return Math.min(mAxisLeft.mAxisMinimum, mAxisRight.mAxisMinimum);
     }
+
+
 
     /**
      * Returns true if either the left or the right or both axes are inverted.

@@ -120,6 +120,7 @@ public class YAxisRenderer extends AxisRenderer {
                 : (mYAxis.mEntryCount - 1);
 
         // draw
+        // TODO Too slow ! Optimize !
         for (int i = from; i < to; i++) {
 
             String text = mYAxis.getFormattedLabel(i);

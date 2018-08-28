@@ -476,7 +476,7 @@ public abstract class AxisBase extends ComponentBase {
     }
 
 
-    private static ForkJoinPool executor = new ForkJoinPool(4);
+    private static ForkJoinPool executor = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
 
 
     class LongestLabel extends RecursiveTask<String> {
