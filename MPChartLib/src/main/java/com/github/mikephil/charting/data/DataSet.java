@@ -184,7 +184,6 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
     public abstract DataSet<T> copy();
 
     /**
-     *
      * @param dataSet
      */
     protected void copy(DataSet dataSet) {
@@ -318,6 +317,25 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
     @Override
     public T getEntryForIndex(int index) {
         return mValues.get(index);
+    }
+
+
+    public interface EntryCallable<T extends Entry> {
+
+        public void call(T t);
+    }
+
+    public void removeLessThan(float x, EntryCallable<T> c) {
+        for (int i = 0; i < mValues.size(); i++) {
+            T v = mValues.get(i);
+            if (v.getX() < x) {
+                removeEntry(v);
+                if (c != null)
+                    c.call(v);
+            } else{
+                break;
+            }
+        }
     }
 
     @Override
