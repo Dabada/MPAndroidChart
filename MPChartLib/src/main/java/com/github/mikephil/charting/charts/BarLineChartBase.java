@@ -295,9 +295,6 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
             averageTime = totalTime / drawCycles;
 
             if (mLogEnabled) {
-                mDescription.setText(String.valueOf(averageTime) + " ms");
-                drawDescription(canvas);
-
                 Log.i(LOG_TAG, "Drawtime: " + drawTime + " ms, average: " + averageTime + " ms, cycles: "
                         + drawCycles);
             }
