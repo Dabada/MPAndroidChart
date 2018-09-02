@@ -24,8 +24,8 @@ import com.github.mikephil.charting.utils.Utils;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
 import java.util.List;
+import java.util.WeakHashMap;
 
 public class LineChartRenderer extends LineRadarRenderer {
 
@@ -578,8 +578,8 @@ public class LineChartRenderer extends LineRadarRenderer {
                         Utils.drawImage(
                                 c,
                                 icon,
-                                (int)(x + iconsOffset.x),
-                                (int)(y + iconsOffset.y),
+                                (int) (x + iconsOffset.x),
+                                (int) (y + iconsOffset.y),
                                 icon.getIntrinsicWidth(),
                                 icon.getIntrinsicHeight());
                     }
@@ -598,7 +598,7 @@ public class LineChartRenderer extends LineRadarRenderer {
     /**
      * cache for the circle bitmaps of all datasets
      */
-    private HashMap<IDataSet, DataSetImageCache> mImageCaches = new HashMap<>();
+    private WeakHashMap<IDataSet, DataSetImageCache> mImageCaches = new WeakHashMap<>();
 
     /**
      * buffer for drawing the circles
@@ -660,7 +660,7 @@ public class LineChartRenderer extends LineRadarRenderer {
 
                 Entry e = dataSet.getEntryForIndex(j);
 
-                if (e == null) break;
+                 if (e == null) break;
 
                 mCirclesBuffer[0] = e.getX();
                 mCirclesBuffer[1] = e.getY() * phaseY;
