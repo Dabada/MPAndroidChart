@@ -18,7 +18,7 @@ public class DefaultValueFormatter implements IValueFormatter
     /**
      * DecimalFormat for formatting
      */
-    protected DecimalFormat mFormat;
+    protected DecimalFormat mFormat = new DecimalFormat();
 
     protected int mDecimalDigits;
 
@@ -47,8 +47,7 @@ public class DefaultValueFormatter implements IValueFormatter
                 b.append(".");
             b.append("0");
         }
-
-        mFormat = new DecimalFormat("###,###,###,##0" + b.toString());
+        mFormat.applyPattern("###,###,###,##0" + b.toString());
     }
 
     @Override
