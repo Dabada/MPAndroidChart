@@ -2,12 +2,14 @@ package com.github.mikephil.charting.highlight;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
 
 /**
  * Created by philipp on 12/06/16.
  */
-public class PieHighlighter extends PieRadarHighlighter<PieChart> {
+public class PieHighlighter<E extends PieEntry, T extends IPieDataSet<E>>
+        extends PieRadarHighlighter<PieChart<E, T>> {
 
     public PieHighlighter(PieChart chart) {
         super(chart);

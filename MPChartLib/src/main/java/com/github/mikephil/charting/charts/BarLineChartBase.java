@@ -43,9 +43,9 @@ import com.github.mikephil.charting.utils.Utils;
  * @author Philipp Jahoda
  */
 @SuppressLint("RtlHardcoded")
-public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<? extends
-        IBarLineScatterCandleBubbleDataSet<? extends Entry>>>
-        extends Chart<T> implements BarLineScatterCandleBubbleDataProvider {
+public abstract class BarLineChartBase<E extends Entry, T extends BarLineScatterCandleBubbleData<E, ? extends
+        IBarLineScatterCandleBubbleDataSet<E>>>
+        extends Chart<E, T> implements BarLineScatterCandleBubbleDataProvider {
 
     /**
      * the maximum number of entries to which values will be drawn
@@ -184,7 +184,7 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
     private long drawTime = 0;
     private long totalTime = 0;
     private long drawCycles = 0;
-    private long averageTime =0;
+    private long averageTime = 0;
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -288,7 +288,7 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
         drawMarkers(canvas);
 
 
-        if (computePerfEnabled){
+        if (computePerfEnabled) {
             drawTime = (SystemClock.elapsedRealtime() - starttime);
             totalTime += drawTime;
             drawCycles += 1;
@@ -1594,7 +1594,6 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
     public float getYChartMin() {
         return Math.min(mAxisLeft.mAxisMinimum, mAxisRight.mAxisMinimum);
     }
-
 
 
     /**

@@ -6,10 +6,12 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IFillFormatter;
 
+import java.util.List;
+
 /**
  * Created by Philpp Jahoda on 21/10/15.
  */
-public interface ILineDataSet extends ILineRadarDataSet<Entry> {
+public interface ILineDataSet<E extends Entry> extends ILineRadarDataSet<E> {
 
     /**
      * Returns the drawing mode for this line dataset
@@ -100,4 +102,6 @@ public interface ILineDataSet extends ILineRadarDataSet<Entry> {
      * @return
      */
     IFillFormatter getFillFormatter();
+
+    List<E> getValues();
 }

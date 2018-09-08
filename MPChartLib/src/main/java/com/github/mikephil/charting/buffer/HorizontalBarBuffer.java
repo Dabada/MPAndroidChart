@@ -4,14 +4,14 @@ package com.github.mikephil.charting.buffer;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 
-public class HorizontalBarBuffer extends BarBuffer {
+public class HorizontalBarBuffer<E extends BarEntry> extends BarBuffer<E> {
 
     public HorizontalBarBuffer(int size, int dataSetCount, boolean containsStacks) {
         super(size, dataSetCount, containsStacks);
     }
 
     @Override
-    public void feed(IBarDataSet data) {
+    public void feed(IBarDataSet<E> data) {
 
         float size = data.getEntryCount() * phaseX;
         float barWidthHalf = mBarWidth / 2f;

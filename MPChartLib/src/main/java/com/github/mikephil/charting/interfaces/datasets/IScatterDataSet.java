@@ -6,7 +6,7 @@ import com.github.mikephil.charting.renderer.scatter.IShapeRenderer;
 /**
  * Created by philipp on 21/10/15.
  */
-public interface IScatterDataSet extends ILineScatterCandleRadarDataSet<Entry> {
+public interface IScatterDataSet<E extends Entry> extends ILineScatterCandleRadarDataSet<E> {
 
     /**
      * Returns the currently set scatter shape size

@@ -5,7 +5,7 @@ import com.github.mikephil.charting.data.BubbleEntry;
 /**
  * Created by philipp on 21/10/15.
  */
-public interface IBubbleDataSet extends IBarLineScatterCandleBubbleDataSet<BubbleEntry> {
+public interface IBubbleDataSet<E extends BubbleEntry> extends IBarLineScatterCandleBubbleDataSet<E> {
 
     /**
      * Sets the width of the circle that surrounds the bubble when highlighted,

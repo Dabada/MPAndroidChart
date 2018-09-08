@@ -5,7 +5,7 @@ import com.github.mikephil.charting.data.RadarEntry;
 /**
  * Created by Philipp Jahoda on 03/11/15.
  */
-public interface IRadarDataSet extends ILineRadarDataSet<RadarEntry> {
+public interface IRadarDataSet<E extends RadarEntry> extends ILineRadarDataSet<E> {
 
     /// flag indicating whether highlight circle should be drawn or not
     boolean isDrawHighlightCircleEnabled();

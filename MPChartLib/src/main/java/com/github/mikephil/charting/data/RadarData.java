@@ -4,7 +4,6 @@ package com.github.mikephil.charting.data;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +12,9 @@ import java.util.List;
  *
  * @author Philipp Jahoda
  */
-public class RadarData extends ChartData<IRadarDataSet> {
+public class RadarData<E extends RadarEntry, T extends IRadarDataSet<E>> extends ChartData<E, T> {
+
+    //E extends Entry, T extends IDataSet<E>
 
     private List<String> mLabels;
 
@@ -21,11 +22,11 @@ public class RadarData extends ChartData<IRadarDataSet> {
         super();
     }
 
-    public RadarData(List<IRadarDataSet> dataSets) {
+    public RadarData(List<T> dataSets) {
         super(dataSets);
     }
 
-    public RadarData(IRadarDataSet... dataSets) {
+    public RadarData(T... dataSets) {
         super(dataSets);
     }
 

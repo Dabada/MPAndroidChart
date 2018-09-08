@@ -36,7 +36,7 @@ public class ScatterChartRenderer extends LineScatterCandleRadarRenderer {
     @Override
     public void drawData(Canvas c) {
 
-        ScatterData scatterData = mChart.getScatterData();
+        ScatterData<?> scatterData = mChart.getScatterData();
 
         for (IScatterDataSet set : scatterData.getDataSets()) {
 
@@ -168,7 +168,7 @@ public class ScatterChartRenderer extends LineScatterCandleRadarRenderer {
     @Override
     public void drawHighlighted(Canvas c, Highlight[] indices) {
 
-        ScatterData scatterData = mChart.getScatterData();
+        ScatterData<?> scatterData = mChart.getScatterData();
 
         for (Highlight high : indices) {
 

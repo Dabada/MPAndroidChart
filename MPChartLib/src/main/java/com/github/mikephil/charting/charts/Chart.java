@@ -61,7 +61,7 @@ import java.util.ArrayList;
  *
  * @author Philipp Jahoda
  */
-public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Entry>>> extends
+public abstract class Chart<E extends Entry, T extends ChartData<E, ? extends IDataSet<E>>> extends
         ViewGroup
         implements ChartInterface {
 

@@ -19,7 +19,7 @@ import com.github.mikephil.charting.renderer.BarChartRenderer;
  *
  * @author Philipp Jahoda
  */
-public class BarChart extends BarLineChartBase<BarData> implements BarDataProvider {
+public class BarChart<E extends BarEntry> extends BarLineChartBase<E, BarData<E>> implements BarDataProvider {
 
     /**
      * flag that indicates whether the highlight should be full-bar oriented, or single-value?
@@ -110,7 +110,7 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
      * @param e
      * @return
      */
-    public RectF getBarBounds(BarEntry e) {
+    public RectF getBarBounds(E e) {
 
         RectF bounds = new RectF();
         getBarBounds(e, bounds);
@@ -125,11 +125,11 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
      * @param e
      * @return
      */
-    public void getBarBounds(BarEntry e, RectF outputRect) {
+    public void getBarBounds(E e, RectF outputRect) {
 
         RectF bounds = outputRect;
 
-        IBarDataSet set = mData.getDataSetForEntry(e);
+        IBarDataSet<E> set = mData.getDataSetForEntry(e);
 
         if (set == null) {
             bounds.set(Float.MIN_VALUE, Float.MIN_VALUE, Float.MIN_VALUE, Float.MIN_VALUE);
@@ -221,7 +221,7 @@ public class BarChart extends BarLineChartBase<BarData> implements BarDataProvid
     }
 
     @Override
-    public BarData getBarData() {
+    public BarData<E> getBarData() {
         return mData;
     }
 

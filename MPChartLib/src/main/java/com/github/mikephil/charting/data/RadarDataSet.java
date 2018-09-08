@@ -9,7 +9,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RadarDataSet extends LineRadarDataSet<RadarEntry> implements IRadarDataSet {
+public class RadarDataSet<E extends RadarEntry> extends LineRadarDataSet<E> implements IRadarDataSet<E> {
 
     /// flag indicating whether highlight circle should be drawn or not
     protected boolean mDrawHighlightCircleEnabled = false;
@@ -25,7 +25,7 @@ public class RadarDataSet extends LineRadarDataSet<RadarEntry> implements IRadar
     protected float mHighlightCircleOuterRadius = 4.0f;
     protected float mHighlightCircleStrokeWidth = 2.0f;
 
-    public RadarDataSet(List<RadarEntry> yVals, String label) {
+    public RadarDataSet(List<E> yVals, String label) {
         super(yVals, label);
     }
 
@@ -100,17 +100,17 @@ public class RadarDataSet extends LineRadarDataSet<RadarEntry> implements IRadar
     }
 
     @Override
-    public DataSet<RadarEntry> copy() {
+    public RadarDataSet<E> copy() {
         List<RadarEntry> entries = new ArrayList<RadarEntry>();
         for (int i = 0; i < mValues.size(); i++) {
             entries.add(mValues.get(i).copy());
         }
-        RadarDataSet copied = new RadarDataSet(entries, getLabel());
+        RadarDataSet<E> copied = new RadarDataSet(entries, getLabel());
         copy(copied);
         return copied;
     }
 
-    protected void copy(RadarDataSet radarDataSet) {
+    protected void copy(RadarDataSet<E> radarDataSet) {
         super.copy(radarDataSet);
         radarDataSet.mDrawHighlightCircleEnabled = mDrawHighlightCircleEnabled;
         radarDataSet.mHighlightCircleFillColor = mHighlightCircleFillColor;

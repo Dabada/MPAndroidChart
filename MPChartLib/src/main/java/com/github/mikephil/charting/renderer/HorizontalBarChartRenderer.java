@@ -40,7 +40,7 @@ public class HorizontalBarChartRenderer extends BarChartRenderer {
     @Override
     public void initBuffers() {
 
-        BarData barData = mChart.getBarData();
+        BarData<?> barData = mChart.getBarData();
         mBarBuffers = new HorizontalBarBuffer[barData.getDataSetCount()];
 
         for (int i = 0; i < mBarBuffers.length; i++) {
@@ -53,7 +53,7 @@ public class HorizontalBarChartRenderer extends BarChartRenderer {
     private RectF mBarShadowRectBuffer = new RectF();
 
     @Override
-    protected void drawDataSet(Canvas c, IBarDataSet dataSet, int index) {
+    protected void drawDataSet(Canvas c, IBarDataSet<?> dataSet, int index) {
 
         Transformer trans = mChart.getTransformer(dataSet.getAxisDependency());
 
@@ -156,7 +156,7 @@ public class HorizontalBarChartRenderer extends BarChartRenderer {
 
             for (int i = 0; i < mChart.getBarData().getDataSetCount(); i++) {
 
-                IBarDataSet dataSet = dataSets.get(i);
+                IBarDataSet<?> dataSet = dataSets.get(i);
 
                 if (!shouldDrawValues(dataSet))
                     continue;

@@ -5,17 +5,17 @@ import com.github.mikephil.charting.interfaces.datasets.IBubbleDataSet;
 
 import java.util.List;
 
-public class BubbleData extends BarLineScatterCandleBubbleData<IBubbleDataSet> {
+public class BubbleData<E extends BubbleEntry> extends BarLineScatterCandleBubbleData<E, IBubbleDataSet<E>> {
 
     public BubbleData() {
         super();
     }
 
-    public BubbleData(IBubbleDataSet... dataSets) {
+    public BubbleData(IBubbleDataSet<E>... dataSets) {
         super(dataSets);
     }
 
-    public BubbleData(List<IBubbleDataSet> dataSets) {
+    public BubbleData(List<IBubbleDataSet<E>> dataSets) {
         super(dataSets);
     }
 
@@ -23,7 +23,7 @@ public class BubbleData extends BarLineScatterCandleBubbleData<IBubbleDataSet> {
     /**
      * Sets the width of the circle that surrounds the bubble when highlighted
      * for all DataSet objects this data object contains, in dp.
-     * 
+     *
      * @param width
      */
     public void setHighlightCircleWidth(float width) {

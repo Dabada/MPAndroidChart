@@ -6,7 +6,7 @@ import com.github.mikephil.charting.data.PieEntry;
 /**
  * Created by Philipp Jahoda on 03/11/15.
  */
-public interface IPieDataSet extends IDataSet<PieEntry> {
+public interface IPieDataSet<E extends PieEntry> extends IDataSet<E> {
 
     /**
      * Returns the space that is set to be between the piechart-slices of this

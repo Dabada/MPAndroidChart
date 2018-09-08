@@ -5,7 +5,7 @@ import com.github.mikephil.charting.data.BarEntry;
 /**
  * Created by philipp on 21/10/15.
  */
-public interface IBarDataSet extends IBarLineScatterCandleBubbleDataSet<BarEntry> {
+public interface IBarDataSet<E extends BarEntry> extends IBarLineScatterCandleBubbleDataSet<E> {
 
     /**
      * Returns true if this DataSet is stacked (stacksize > 1) or not.

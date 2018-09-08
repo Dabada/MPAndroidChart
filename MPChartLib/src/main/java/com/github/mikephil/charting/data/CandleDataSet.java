@@ -15,7 +15,8 @@ import java.util.List;
  *
  * @author Philipp Jahoda
  */
-public class CandleDataSet extends LineScatterCandleRadarDataSet<CandleEntry> implements ICandleDataSet {
+public class CandleDataSet<E extends CandleEntry>
+        extends LineScatterCandleRadarDataSet<E> implements ICandleDataSet<E> {
 
     /**
      * the width of the shadow of the candle
@@ -73,22 +74,22 @@ public class CandleDataSet extends LineScatterCandleRadarDataSet<CandleEntry> im
      */
     protected int mShadowColor = ColorTemplate.COLOR_SKIP;
 
-    public CandleDataSet(List<CandleEntry> yVals, String label) {
+    public CandleDataSet(List<E> yVals, String label) {
         super(yVals, label);
     }
 
     @Override
-    public DataSet<CandleEntry> copy() {
-        List<CandleEntry> entries = new ArrayList<CandleEntry>();
+    public CandleDataSet<E> copy() {
+        List<CandleEntry> entries = new ArrayList<>();
         for (int i = 0; i < mValues.size(); i++) {
             entries.add(mValues.get(i).copy());
         }
-        CandleDataSet copied = new CandleDataSet(entries, getLabel());
+        CandleDataSet<E> copied = new CandleDataSet(entries, getLabel());
         copy(copied);
         return copied;
     }
 
-    protected void copy(CandleDataSet candleDataSet) {
+    protected void copy(CandleDataSet<E> candleDataSet) {
         super.copy(candleDataSet);
         candleDataSet.mShadowWidth = mShadowWidth;
         candleDataSet.mShowCandleBar = mShowCandleBar;
@@ -104,7 +105,7 @@ public class CandleDataSet extends LineScatterCandleRadarDataSet<CandleEntry> im
     }
 
     @Override
-    protected void calcMinMax(CandleEntry e) {
+    protected void calcMinMax(E e) {
 
         if (e.getLow() < mYMin)
             mYMin = e.getLow();
@@ -116,7 +117,7 @@ public class CandleDataSet extends LineScatterCandleRadarDataSet<CandleEntry> im
     }
 
     @Override
-    protected void calcMinMaxY(CandleEntry e) {
+    protected void calcMinMaxY(E e) {
 
         if (e.getHigh() < mYMin)
             mYMin = e.getHigh();

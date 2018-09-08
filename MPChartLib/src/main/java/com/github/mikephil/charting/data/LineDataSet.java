@@ -15,7 +15,7 @@ import com.github.mikephil.charting.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet {
+public class LineDataSet<E extends Entry> extends LineRadarDataSet<E> implements ILineDataSet<E> {
 
     /**
      * Drawing mode for this line dataset
@@ -65,7 +65,7 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
     private boolean mDrawCircleHole = true;
 
 
-    public LineDataSet(List<Entry> yVals, String label) {
+    public LineDataSet(List<E> yVals, String label) {
         super(yVals, label);
 
         // mCircleRadius = Utils.convertDpToPixel(4f);
@@ -83,7 +83,7 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
     }
 
     @Override
-    public DataSet<Entry> copy() {
+    public DataSet<E> copy() {
         List<Entry> entries = new ArrayList<Entry>();
         for (int i = 0; i < mValues.size(); i++) {
             entries.add(mValues.get(i).copy());
@@ -93,7 +93,7 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
         return copied;
     }
 
-    protected void copy(LineDataSet lineDataSet) {
+    protected void copy(LineDataSet<E> lineDataSet) {
         super.copy(lineDataSet);
         lineDataSet.mCircleColors = mCircleColors;
         lineDataSet.mCircleHoleColor = mCircleHoleColor;

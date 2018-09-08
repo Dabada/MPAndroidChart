@@ -26,7 +26,7 @@ import com.github.mikephil.charting.utils.Utils;
  *
  * @author Philipp Jahoda
  */
-public class HorizontalBarChart extends BarChart {
+public class HorizontalBarChart<E extends BarEntry>  extends BarChart<E> {
 
     public HorizontalBarChart(Context context) {
         super(context);
@@ -139,7 +139,7 @@ public class HorizontalBarChart extends BarChart {
     }
 
     @Override
-    public void getBarBounds(BarEntry e, RectF outputRect) {
+    public void getBarBounds(E e, RectF outputRect) {
 
         RectF bounds = outputRect;
         IBarDataSet set = mData.getDataSetForEntry(e);

@@ -23,7 +23,7 @@ public class HorizontalBarHighlighter extends BarHighlighter {
 	@Override
 	public Highlight getHighlight(float x, float y) {
 
-		BarData barData = mChart.getBarData();
+		BarData<?> barData = mChart.getBarData();
 
 		MPPointD pos = getValsForTouch(y, x);
 

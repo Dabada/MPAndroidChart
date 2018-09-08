@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Philipp Jahoda
  */
-public abstract class ChartData<T extends IDataSet<? extends Entry>> {
+public abstract class ChartData<E extends Entry, T extends IDataSet<E>> {
 
     /**
      * maximum y-value in the value array across all axes
@@ -94,6 +94,9 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
      * @param sets the dataset array
      */
     public ChartData(List<T> sets) {
+        if (sets == null)
+            throw new UnsupportedOperationException("sets parameter can't be null");
+
         this.mDataSets = sets;
         notifyDataChanged();
     }

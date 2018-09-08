@@ -2,20 +2,20 @@ package com.github.mikephil.charting.data;
 
 import com.github.mikephil.charting.interfaces.datasets.ICandleDataSet;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CandleData extends BarLineScatterCandleBubbleData<ICandleDataSet> {
+public class CandleData<E extends CandleEntry>
+        extends BarLineScatterCandleBubbleData<E, ICandleDataSet<E>> {
 
     public CandleData() {
         super();
     }
 
-    public CandleData(List<ICandleDataSet> dataSets) {
+    public CandleData(List<ICandleDataSet<E>> dataSets) {
         super(dataSets);
     }
 
-    public CandleData(ICandleDataSet... dataSets) {
+    public CandleData(ICandleDataSet<E>... dataSets) {
         super(dataSets);
     }
 }

@@ -29,7 +29,7 @@ import java.util.WeakHashMap;
 
 public class LineChartRenderer extends LineRadarRenderer {
 
-    protected LineDataProvider mChart;
+    protected LineDataProvider<? extends Entry, ? extends ILineDataSet<? extends Entry>> mChart;
 
     /**
      * paint for the inner circle of the value indicators
@@ -92,9 +92,9 @@ public class LineChartRenderer extends LineRadarRenderer {
 
         drawBitmap.eraseColor(Color.TRANSPARENT);
 
-        LineData lineData = mChart.getLineData();
+        LineData<? extends Entry, ? extends ILineDataSet<? extends Entry>> lineData = mChart.getLineData();
 
-        for (ILineDataSet set : lineData.getDataSets()) {
+        for (ILineDataSet<?> set : lineData.getDataSets()) {
 
             if (set.isVisible())
                 drawDataSet(c, set);
@@ -524,7 +524,7 @@ public class LineChartRenderer extends LineRadarRenderer {
 
         if (isDrawingValuesAllowed(mChart)) {
 
-            List<ILineDataSet> dataSets = mChart.getLineData().getDataSets();
+            List<? extends ILineDataSet<?>> dataSets = mChart.getLineData().getDataSets();
 
             for (int i = 0; i < dataSets.size(); i++) {
 
@@ -614,7 +614,7 @@ public class LineChartRenderer extends LineRadarRenderer {
         mCirclesBuffer[0] = 0;
         mCirclesBuffer[1] = 0;
 
-        List<ILineDataSet> dataSets = mChart.getLineData().getDataSets();
+        List<? extends ILineDataSet> dataSets = mChart.getLineData().getDataSets();
 
         for (int i = 0; i < dataSets.size(); i++) {
 
@@ -660,7 +660,7 @@ public class LineChartRenderer extends LineRadarRenderer {
 
                 Entry e = dataSet.getEntryForIndex(j);
 
-                 if (e == null) break;
+                if (e == null) break;
 
                 mCirclesBuffer[0] = e.getX();
                 mCirclesBuffer[1] = e.getY() * phaseY;
@@ -686,11 +686,11 @@ public class LineChartRenderer extends LineRadarRenderer {
     @Override
     public void drawHighlighted(Canvas c, Highlight[] indices) {
 
-        LineData lineData = mChart.getLineData();
+        LineData<? extends Entry, ? extends ILineDataSet<? extends Entry>> lineData = mChart.getLineData();
 
         for (Highlight high : indices) {
 
-            ILineDataSet set = lineData.getDataSetByIndex(high.getDataSetIndex());
+            ILineDataSet<?> set = lineData.getDataSetByIndex(high.getDataSetIndex());
 
             if (set == null || !set.isHighlightEnabled())
                 continue;

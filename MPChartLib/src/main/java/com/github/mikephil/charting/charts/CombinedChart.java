@@ -25,7 +25,7 @@ import com.github.mikephil.charting.renderer.CombinedChartRenderer;
  *
  * @author Philipp Jahoda
  */
-public class CombinedChart extends BarLineChartBase<CombinedData> implements CombinedDataProvider {
+public class CombinedChart<E extends Entry> extends BarLineChartBase<E, CombinedData<E>> implements CombinedDataProvider {
 
     /**
      * if set to true, all values are drawn above their bars, instead of below
@@ -93,7 +93,7 @@ public class CombinedChart extends BarLineChartBase<CombinedData> implements Com
     public void setData(CombinedData data) {
         super.setData(data);
         setHighlighter(new CombinedHighlighter(this, this));
-        ((CombinedChartRenderer)mRenderer).createRenderers();
+        ((CombinedChartRenderer) mRenderer).createRenderers();
         mRenderer.initBuffers();
     }
 

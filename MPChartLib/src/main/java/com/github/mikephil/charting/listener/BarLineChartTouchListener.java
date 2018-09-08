@@ -2,7 +2,6 @@ package com.github.mikephil.charting.listener;
 
 import android.annotation.SuppressLint;
 import android.graphics.Matrix;
-import android.graphics.PointF;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -26,8 +25,8 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
  *
  * @author Philipp Jahoda
  */
-public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBase<? extends BarLineScatterCandleBubbleData<?
-        extends IBarLineScatterCandleBubbleDataSet<? extends Entry>>>> {
+public class BarLineChartTouchListener<E extends Entry>
+        extends ChartTouchListener<BarLineChartBase<E, ? extends BarLineScatterCandleBubbleData<E, ? extends IBarLineScatterCandleBubbleDataSet<E>>>> {
 
     /**
      * the original touch-matrix from the chart
@@ -42,12 +41,12 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
     /**
      * point where the touch action started
      */
-    private MPPointF mTouchStartPoint = MPPointF.getInstance(0,0);
+    private MPPointF mTouchStartPoint = MPPointF.getInstance(0, 0);
 
     /**
      * center between two pointers (fingers on the display)
      */
-    private MPPointF mTouchPointCenter = MPPointF.getInstance(0,0);
+    private MPPointF mTouchPointCenter = MPPointF.getInstance(0, 0);
 
     private float mSavedXDist = 1f;
     private float mSavedYDist = 1f;
@@ -61,8 +60,8 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
     private VelocityTracker mVelocityTracker;
 
     private long mDecelerationLastTime = 0;
-    private MPPointF mDecelerationCurrentPoint = MPPointF.getInstance(0,0);
-    private MPPointF mDecelerationVelocity = MPPointF.getInstance(0,0);
+    private MPPointF mDecelerationCurrentPoint = MPPointF.getInstance(0, 0);
+    private MPPointF mDecelerationVelocity = MPPointF.getInstance(0, 0);
 
     /**
      * the distance of movement that will be counted as a drag
@@ -82,8 +81,8 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
      * @param dragTriggerDistance the minimum movement distance that will be interpreted as a "drag" gesture in dp (3dp equals
      *                            to about 9 pixels on a 5.5" FHD screen)
      */
-    public BarLineChartTouchListener(BarLineChartBase<? extends BarLineScatterCandleBubbleData<? extends
-            IBarLineScatterCandleBubbleDataSet<? extends Entry>>> chart, Matrix touchMatrix, float dragTriggerDistance) {
+    public BarLineChartTouchListener(BarLineChartBase<E, ? extends BarLineScatterCandleBubbleData<E, ? extends
+            IBarLineScatterCandleBubbleDataSet<E>>> chart, Matrix touchMatrix, float dragTriggerDistance) {
         super(chart);
         this.mMatrix = touchMatrix;
 

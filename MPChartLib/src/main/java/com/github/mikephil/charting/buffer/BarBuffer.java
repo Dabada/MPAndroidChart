@@ -4,7 +4,7 @@ package com.github.mikephil.charting.buffer;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 
-public class BarBuffer extends AbstractBuffer<IBarDataSet> {
+public class BarBuffer<E extends BarEntry> extends AbstractBuffer<IBarDataSet<E>> {
 
     protected int mDataSetIndex = 0;
     protected int mDataSetCount = 1;
@@ -41,7 +41,7 @@ public class BarBuffer extends AbstractBuffer<IBarDataSet> {
     }
 
     @Override
-    public void feed(IBarDataSet data) {
+    public void feed(IBarDataSet<E> data) {
 
         float size = data.getEntryCount() * phaseX;
         float barWidthHalf = mBarWidth / 2f;

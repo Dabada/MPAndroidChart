@@ -46,7 +46,7 @@ public class BubbleChartRenderer extends BarLineScatterCandleBubbleRenderer {
     @Override
     public void drawData(Canvas c) {
 
-        BubbleData bubbleData = mChart.getBubbleData();
+        BubbleData<?> bubbleData = mChart.getBubbleData();
 
         for (IBubbleDataSet set : bubbleData.getDataSets()) {
 
@@ -65,7 +65,7 @@ public class BubbleChartRenderer extends BarLineScatterCandleBubbleRenderer {
         return shapeSize;
     }
 
-    protected void drawDataSet(Canvas c, IBubbleDataSet dataSet) {
+    protected void drawDataSet(Canvas c, IBubbleDataSet<?> dataSet) {
 
         Transformer trans = mChart.getTransformer(dataSet.getAxisDependency());
 
@@ -129,7 +129,7 @@ public class BubbleChartRenderer extends BarLineScatterCandleBubbleRenderer {
 
             for (int i = 0; i < dataSets.size(); i++) {
 
-                IBubbleDataSet dataSet = dataSets.get(i);
+                IBubbleDataSet<?> dataSet = dataSets.get(i);
 
                 if (!shouldDrawValues(dataSet))
                     continue;
@@ -201,13 +201,13 @@ public class BubbleChartRenderer extends BarLineScatterCandleBubbleRenderer {
     @Override
     public void drawHighlighted(Canvas c, Highlight[] indices) {
 
-        BubbleData bubbleData = mChart.getBubbleData();
+        BubbleData<?> bubbleData = mChart.getBubbleData();
 
         float phaseY = mAnimator.getPhaseY();
 
         for (Highlight high : indices) {
 
-            IBubbleDataSet set = bubbleData.getDataSetByIndex(high.getDataSetIndex());
+            IBubbleDataSet<?> set = bubbleData.getDataSetByIndex(high.getDataSetIndex());
 
             if (set == null || !set.isHighlightEnabled())
                 continue;

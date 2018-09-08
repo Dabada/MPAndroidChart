@@ -26,7 +26,7 @@ public class BarHighlighter extends ChartHighlighter<BarDataProvider> {
 
         MPPointD pos = getValsForTouch(x, y);
 
-        BarData barData = mChart.getBarData();
+        BarData<?> barData = mChart.getBarData();
 
         IBarDataSet set = barData.getDataSetByIndex(high.getDataSetIndex());
         if (set.isStacked()) {
@@ -52,7 +52,7 @@ public class BarHighlighter extends ChartHighlighter<BarDataProvider> {
      * @param yVal
      * @return
      */
-    public Highlight getStackedHighlight(Highlight high, IBarDataSet set, float xVal, float yVal) {
+    public Highlight getStackedHighlight(Highlight high, IBarDataSet<?> set, float xVal, float yVal) {
 
         BarEntry entry = set.getEntryForXValue(xVal, yVal);
 

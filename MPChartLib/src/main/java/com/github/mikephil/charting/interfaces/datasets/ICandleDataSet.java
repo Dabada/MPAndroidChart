@@ -3,11 +3,12 @@ package com.github.mikephil.charting.interfaces.datasets;
 import android.graphics.Paint;
 
 import com.github.mikephil.charting.data.CandleEntry;
+import com.github.mikephil.charting.data.Entry;
 
 /**
  * Created by philipp on 21/10/15.
  */
-public interface ICandleDataSet extends ILineScatterCandleRadarDataSet<CandleEntry> {
+public interface ICandleDataSet<E extends CandleEntry> extends ILineScatterCandleRadarDataSet<E> {
 
     /**
      * Returns the space that is left out on the left and right side of each

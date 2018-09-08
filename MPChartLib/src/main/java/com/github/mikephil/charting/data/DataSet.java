@@ -186,7 +186,7 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
     /**
      * @param dataSet
      */
-    protected void copy(DataSet dataSet) {
+    protected void copy(DataSet<T> dataSet) {
         super.copy(dataSet);
     }
 

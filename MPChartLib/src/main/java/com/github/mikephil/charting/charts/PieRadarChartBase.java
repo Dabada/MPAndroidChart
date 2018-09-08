@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.animation.Easing.EasingFunction;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -27,8 +26,8 @@ import com.github.mikephil.charting.utils.Utils;
  *
  * @author Philipp Jahoda
  */
-public abstract class PieRadarChartBase<T extends ChartData<? extends IDataSet<? extends Entry>>>
-        extends Chart<T> {
+public abstract class PieRadarChartBase<E extends Entry, T extends ChartData<E, ? extends IDataSet<E>>>
+        extends Chart<E, T> {
 
     /**
      * holds the normalized version of the current rotation angle of the chart

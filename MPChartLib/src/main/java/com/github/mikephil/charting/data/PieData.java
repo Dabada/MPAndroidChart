@@ -4,9 +4,6 @@ package com.github.mikephil.charting.data;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A PieData object can only represent one DataSet. Unlike all other charts, the
  * legend labels of the PieChart are created from the x-values array, and not
@@ -15,13 +12,14 @@ import java.util.List;
  *
  * @author Philipp Jahoda
  */
-public class PieData extends ChartData<IPieDataSet> {
+public class PieData<E extends PieEntry, T extends IPieDataSet<E>>
+        extends ChartData<E, T> {
 
     public PieData() {
         super();
     }
 
-    public PieData(IPieDataSet dataSet) {
+    public PieData(T dataSet) {
         super(dataSet);
     }
 
@@ -30,7 +28,7 @@ public class PieData extends ChartData<IPieDataSet> {
      *
      * @param dataSet
      */
-    public void setDataSet(IPieDataSet dataSet) {
+    public void setDataSet(T dataSet) {
         mDataSets.clear();
         mDataSets.add(dataSet);
         notifyDataChanged();
@@ -42,7 +40,7 @@ public class PieData extends ChartData<IPieDataSet> {
      *
      * @return
      */
-    public IPieDataSet getDataSet() {
+    public T getDataSet() {
         return mDataSets.get(0);
     }
 
@@ -53,12 +51,12 @@ public class PieData extends ChartData<IPieDataSet> {
      * @return
      */
     @Override
-    public IPieDataSet getDataSetByIndex(int index) {
+    public T getDataSetByIndex(int index) {
         return index == 0 ? getDataSet() : null;
     }
 
     @Override
-    public IPieDataSet getDataSetByLabel(String label, boolean ignorecase) {
+    public T getDataSetByLabel(String label, boolean ignorecase) {
         return ignorecase ? label.equalsIgnoreCase(mDataSets.get(0).getLabel()) ? mDataSets.get(0)
                 : null : label.equals(mDataSets.get(0).getLabel()) ? mDataSets.get(0) : null;
     }

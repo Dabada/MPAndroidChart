@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Philipp Jahoda
  */
-public class BarData extends BarLineScatterCandleBubbleData<IBarDataSet> {
+public class BarData<E extends BarEntry> extends BarLineScatterCandleBubbleData<E, IBarDataSet<E>> {
 
     /**
      * the width of the bars on the x-axis, in values (not pixels)
@@ -21,11 +21,11 @@ public class BarData extends BarLineScatterCandleBubbleData<IBarDataSet> {
         super();
     }
 
-    public BarData(IBarDataSet... dataSets) {
+    public BarData(IBarDataSet<E>... dataSets) {
         super(dataSets);
     }
 
-    public BarData(List<IBarDataSet> dataSets) {
+    public BarData(List<IBarDataSet<E>> dataSets) {
         super(dataSets);
     }
 
@@ -60,7 +60,7 @@ public class BarData extends BarLineScatterCandleBubbleData<IBarDataSet> {
             throw new RuntimeException("BarData needs to hold at least 2 BarDataSets to allow grouping.");
         }
 
-        IBarDataSet max = getMaxEntryCountSet();
+        IBarDataSet<E> max = getMaxEntryCountSet();
         int maxEntryCount = max.getEntryCount();
 
         float groupSpaceWidthHalf = groupSpace / 2f;
@@ -74,7 +74,7 @@ public class BarData extends BarLineScatterCandleBubbleData<IBarDataSet> {
             float start = fromX;
             fromX += groupSpaceWidthHalf;
 
-            for (IBarDataSet set : mDataSets) {
+            for (IBarDataSet<E> set : mDataSets) {
 
                 fromX += barSpaceHalf;
                 fromX += barWidthHalf;

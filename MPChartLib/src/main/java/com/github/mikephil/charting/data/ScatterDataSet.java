@@ -16,7 +16,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScatterDataSet extends LineScatterCandleRadarDataSet<Entry> implements IScatterDataSet {
+public class ScatterDataSet<E extends Entry> extends LineScatterCandleRadarDataSet<E> implements IScatterDataSet<E> {
 
     /**
      * the size the scattershape will have, in density pixels
@@ -41,22 +41,22 @@ public class ScatterDataSet extends LineScatterCandleRadarDataSet<Entry> impleme
      */
     private int mScatterShapeHoleColor = ColorTemplate.COLOR_NONE;
 
-    public ScatterDataSet(List<Entry> yVals, String label) {
+    public ScatterDataSet(List<E> yVals, String label) {
         super(yVals, label);
     }
 
     @Override
-    public DataSet<Entry> copy() {
-        List<Entry> entries = new ArrayList<Entry>();
+    public ScatterDataSet<E> copy() {
+        List<Entry> entries = new ArrayList<>();
         for (int i = 0; i < mValues.size(); i++) {
             entries.add(mValues.get(i).copy());
         }
-        ScatterDataSet copied = new ScatterDataSet(entries, getLabel());
+        ScatterDataSet<E> copied = new ScatterDataSet(entries, getLabel());
         copy(copied);
         return copied;
     }
 
-    protected void copy(ScatterDataSet scatterDataSet) {
+    protected void copy(ScatterDataSet<E> scatterDataSet) {
         super.copy(scatterDataSet);
         scatterDataSet.mShapeSize = mShapeSize;
         scatterDataSet.mShapeRenderer = mShapeRenderer;

@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Philipp Jahoda
  */
-public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatterCandleBubbleDataSet<? extends Entry>> {
+public class CombinedData<E extends Entry> extends BarLineScatterCandleBubbleData<E, IBarLineScatterCandleBubbleDataSet<E>> {
 
     private LineData mLineData;
     private BarData mBarData;
@@ -55,7 +55,7 @@ public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatter
     @Override
     public void calcMinMax() {
 
-        if(mDataSets == null){
+        if (mDataSets == null) {
             mDataSets = new ArrayList<>();
         }
         mDataSets.clear();
@@ -76,7 +76,7 @@ public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatter
 
             data.calcMinMax();
 
-            List<IBarLineScatterCandleBubbleDataSet<? extends Entry>> sets = data.getDataSets();
+            List<IBarLineScatterCandleBubbleDataSet<E>> sets = data.getDataSets();
             mDataSets.addAll(sets);
 
             if (data.getYMax() > mYMax)
@@ -222,7 +222,7 @@ public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatter
     }
 
     @Override
-    public boolean removeDataSet(IBarLineScatterCandleBubbleDataSet<? extends Entry> d) {
+    public boolean removeDataSet(IBarLineScatterCandleBubbleDataSet<E> d) {
 
         List<BarLineScatterCandleBubbleData> datas = getAllData();
 

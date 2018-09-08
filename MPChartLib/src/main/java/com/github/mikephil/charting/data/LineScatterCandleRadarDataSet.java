@@ -110,7 +110,7 @@ public abstract class LineScatterCandleRadarDataSet<T extends Entry> extends Bar
         return mHighlightDashPathEffect;
     }
 
-    protected void copy(LineScatterCandleRadarDataSet lineScatterCandleRadarDataSet) {
+    protected void copy(LineScatterCandleRadarDataSet<T> lineScatterCandleRadarDataSet) {
         super.copy(lineScatterCandleRadarDataSet);
         lineScatterCandleRadarDataSet.mDrawHorizontalHighlightIndicator = mDrawHorizontalHighlightIndicator;
         lineScatterCandleRadarDataSet.mDrawVerticalHighlightIndicator = mDrawVerticalHighlightIndicator;

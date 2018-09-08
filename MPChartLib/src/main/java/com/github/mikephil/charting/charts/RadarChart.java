@@ -10,7 +10,9 @@ import android.util.AttributeSet;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.RadarData;
+import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.highlight.RadarHighlighter;
+import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 import com.github.mikephil.charting.renderer.RadarChartRenderer;
 import com.github.mikephil.charting.renderer.XAxisRendererRadarChart;
 import com.github.mikephil.charting.renderer.YAxisRendererRadarChart;
@@ -22,8 +24,10 @@ import com.github.mikephil.charting.utils.Utils;
  *
  * @author Philipp Jahoda
  */
-public class RadarChart extends PieRadarChartBase<RadarData> {
+public class RadarChart<E extends RadarEntry, T extends IRadarDataSet<E>> extends PieRadarChartBase<E, RadarData<E, T>> {
 
+    // RadarData<E extends RadarEntry, T extends IRadarDataSet<E>>
+    // <E extends Entry, T extends ChartData<E, ? extends IDataSet<E>>>
     /**
      * width of the main web lines
      */

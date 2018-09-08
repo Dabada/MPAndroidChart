@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.highlight.PieHighlighter;
 import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
@@ -24,7 +25,8 @@ import java.util.List;
  *
  * @author Philipp Jahoda
  */
-public class PieChart extends PieRadarChartBase<PieData> {
+public class PieChart<E extends PieEntry, T extends IPieDataSet<E>>
+        extends PieRadarChartBase<E, PieData<E, T>> {
 
     /**
      * rect object that represents the bounds of the piechart, needed for
@@ -226,13 +228,13 @@ public class PieChart extends PieRadarChartBase<PieData> {
 
         float yValueSum = mData.getYValueSum();
 
-        List<IPieDataSet> dataSets = mData.getDataSets();
+        List<T> dataSets = mData.getDataSets();
 
         int cnt = 0;
 
         for (int i = 0; i < mData.getDataSetCount(); i++) {
 
-            IPieDataSet set = dataSets.get(i);
+            T set = dataSets.get(i);
 
             for (int j = 0; j < set.getEntryCount(); j++) {
 
@@ -325,7 +327,7 @@ public class PieChart extends PieRadarChartBase<PieData> {
      */
     public int getDataSetIndexForIndex(int xIndex) {
 
-        List<IPieDataSet> dataSets = mData.getDataSets();
+        List<T> dataSets = mData.getDataSets();
 
         for (int i = 0; i < dataSets.size(); i++) {
             if (dataSets.get(i).getEntryForXValue(xIndex, Float.NaN) != null)

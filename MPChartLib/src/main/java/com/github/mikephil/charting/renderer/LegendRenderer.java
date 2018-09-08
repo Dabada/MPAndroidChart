@@ -80,7 +80,7 @@ public class LegendRenderer extends Renderer {
      *
      * @param data
      */
-    public void computeLegend(ChartData<?> data) {
+    public void computeLegend(ChartData<?, ?> data) {
 
         if (!mLegend.isLegendCustom()) {
 
@@ -124,9 +124,9 @@ public class LegendRenderer extends Renderer {
                         ));
                     }
 
-                } else if (dataSet instanceof IPieDataSet) {
+                } else if (dataSet instanceof IPieDataSet<?>) {
 
-                    IPieDataSet pds = (IPieDataSet) dataSet;
+                    IPieDataSet<?> pds = (IPieDataSet<?>) dataSet;
 
                     for (int j = 0; j < clrs.size() && j < entryCount; j++) {
 
@@ -522,8 +522,7 @@ public class LegendRenderer extends Renderer {
                 c.drawRect(x, y - half, x + formSize, y + half, mLegendFormPaint);
                 break;
 
-            case LINE:
-            {
+            case LINE: {
                 final float formLineWidth = Utils.convertDpToPixel(
                         Float.isNaN(entry.formLineWidth)
                                 ? legend.getFormLineWidth()
@@ -540,7 +539,7 @@ public class LegendRenderer extends Renderer {
                 mLineFormPath.lineTo(x + formSize, y);
                 c.drawPath(mLineFormPath, mLegendFormPaint);
             }
-                break;
+            break;
         }
 
         c.restoreToCount(restoreCount);

@@ -4,8 +4,10 @@ package com.github.mikephil.charting.charts;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.renderer.LineChartRenderer;
 
 /**
@@ -13,7 +15,8 @@ import com.github.mikephil.charting.renderer.LineChartRenderer;
  *
  * @author Philipp Jahoda
  */
-public class LineChart extends BarLineChartBase<LineData> implements LineDataProvider {
+public class LineChart<E extends Entry, L extends ILineDataSet<E>>
+        extends BarLineChartBase<E, LineData<E, L>> implements LineDataProvider {
 
     public LineChart(Context context) {
         super(context);

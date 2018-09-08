@@ -206,7 +206,7 @@ public class Transformer {
      * @param data
      * @return
      */
-    public float[] generateTransformedValuesCandle(ICandleDataSet data,
+    public float[] generateTransformedValuesCandle(ICandleDataSet<?> data,
                                                    float phaseX, float phaseY, int from, int to) {
 
         final int count = (int) ((to - from) * phaseX + 1) * 2;

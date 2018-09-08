@@ -2,7 +2,6 @@
 package com.github.mikephil.charting.listener;
 
 import android.annotation.SuppressLint;
-import android.graphics.PointF;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -19,9 +18,9 @@ import java.util.ArrayList;
  *
  * @author Philipp Jahoda
  */
-public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChartBase<?>> {
+public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChartBase<?, ?>> {
 
-    private MPPointF mTouchStartPoint = MPPointF.getInstance(0,0);
+    private MPPointF mTouchStartPoint = MPPointF.getInstance(0, 0);
 
     /**
      * the angle where the dragging started
@@ -33,7 +32,7 @@ public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChart
     private long mDecelerationLastTime = 0;
     private float mDecelerationAngularVelocity = 0.f;
 
-    public PieRadarChartTouchListener(PieRadarChartBase<?> chart) {
+    public PieRadarChartTouchListener(PieRadarChartBase<?, ?> chart) {
         super(chart);
     }
 
@@ -144,7 +143,7 @@ public class PieRadarChartTouchListener extends ChartTouchListener<PieRadarChart
             l.onChartSingleTapped(e);
         }
 
-        if(!mChart.isHighlightPerTapEnabled()) {
+        if (!mChart.isHighlightPerTapEnabled()) {
             return false;
         }
 

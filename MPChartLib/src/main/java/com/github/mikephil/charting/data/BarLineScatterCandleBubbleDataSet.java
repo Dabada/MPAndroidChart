@@ -41,7 +41,7 @@ public abstract class BarLineScatterCandleBubbleDataSet<T extends Entry>
         return mHighLightColor;
     }
 
-    protected void copy(BarLineScatterCandleBubbleDataSet barLineScatterCandleBubbleDataSet) {
+    protected void copy(BarLineScatterCandleBubbleDataSet<T> barLineScatterCandleBubbleDataSet) {
         super.copy(barLineScatterCandleBubbleDataSet);
         barLineScatterCandleBubbleDataSet.mHighLightColor = mHighLightColor;
     }
