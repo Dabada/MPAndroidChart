@@ -525,9 +525,8 @@ public abstract class Chart<E extends Entry, T extends ChartData<E, ? extends ID
      * @return
      */
     public boolean valuesToHighlight() {
-        return mIndicesToHighlight == null || mIndicesToHighlight.length <= 0
-                || mIndicesToHighlight[0] == null ? false
-                : true;
+        return mIndicesToHighlight != null && mIndicesToHighlight.length > 0
+                && mIndicesToHighlight[0] != null;
     }
 
     /**

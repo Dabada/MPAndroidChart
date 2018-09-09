@@ -233,11 +233,16 @@ public abstract class BarLineChartBase<E extends Entry, T extends BarLineScatter
         if (mAxisRight.isEnabled() && mAxisRight.isDrawLimitLinesBehindDataEnabled())
             mAxisRendererRight.renderLimitLines(canvas);
 
+        int clipRestoreCount;
+        // MJ: CLIPPING IS REMOVED already done with dataDraw method
         // make sure the data cannot be drawn outside the content-rect
-        int clipRestoreCount = canvas.save();
-        canvas.clipRect(mViewPortHandler.getContentRect());
+        //int clipRestoreCount = canvas.save();
+        //canvas.clipRect(mViewPortHandler.getContentRect());
 
         mRenderer.drawData(canvas);
+
+        // Removes clipping rectangle
+        //canvas.restoreToCount(clipRestoreCount);
 
         if (!mXAxis.isDrawGridLinesBehindDataEnabled())
             mXAxisRenderer.renderGridLines(canvas);
@@ -251,9 +256,6 @@ public abstract class BarLineChartBase<E extends Entry, T extends BarLineScatter
         // if highlighting is enabled
         if (valuesToHighlight())
             mRenderer.drawHighlighted(canvas, mIndicesToHighlight);
-
-        // Removes clipping rectangle
-        canvas.restoreToCount(clipRestoreCount);
 
         mRenderer.drawExtras(canvas);
 

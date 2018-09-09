@@ -377,8 +377,9 @@ public class LineChartRenderer extends LineRadarRenderer {
 
         } else { // only one color per dataset
 
-            if (mLineBuffer.length < Math.max((entryCount) * pointsPerEntryPair, pointsPerEntryPair) * 2)
-                mLineBuffer = new float[Math.max((entryCount) * pointsPerEntryPair, pointsPerEntryPair) * 4];
+            int max = Math.max((entryCount) * pointsPerEntryPair, pointsPerEntryPair);
+            if (mLineBuffer.length < max * 2)
+                mLineBuffer = new float[max * 4];
 
             Entry e1, e2;
 

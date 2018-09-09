@@ -495,7 +495,9 @@ public abstract class AxisBase extends ComponentBase {
         protected String compute() {
 
             int sliceLength = (end - start) + 1;
-            if (sliceLength == 1) {
+            if (sliceLength == 0) {
+                return "";
+            } else if (sliceLength == 1) {
                 return getFormattedLabel(start);
             } else if (sliceLength == 2) {
                 // 1 - 0 + 1 = 2
@@ -525,7 +527,7 @@ public abstract class AxisBase extends ComponentBase {
 
         String longest = "";
 
-        if (parallelismEnabled) {
+        if (parallelismEnabled && mEntries.length > 1) {
             longest = executor.invoke(new LongestLabel(mEntries, 0, mEntries.length - 1));
         } else {
             for (int i = 0; i < mEntries.length; i++) {

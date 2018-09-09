@@ -12,8 +12,10 @@ import java.text.DecimalFormat;
  *
  * @author Philipp Jahoda
  */
-public class DefaultValueFormatter implements IValueFormatter
-{
+public class DefaultValueFormatter implements IValueFormatter {
+
+
+    protected static String decimalBasePattern = ".000000000000000000000";
 
     /**
      * DecimalFormat for formatting
@@ -38,16 +40,12 @@ public class DefaultValueFormatter implements IValueFormatter
      * @param digits
      */
     public void setup(int digits) {
-
         this.mDecimalDigits = digits;
+        String decimal = "";
+        if (digits > 0)
+            decimal = decimalBasePattern.substring(0, digits);
 
-        StringBuffer b = new StringBuffer();
-        for (int i = 0; i < digits; i++) {
-            if (i == 0)
-                b.append(".");
-            b.append("0");
-        }
-        mFormat.applyPattern("###,###,###,##0" + b.toString());
+        mFormat.applyPattern("###,###,###,##0" + decimal);
     }
 
     @Override

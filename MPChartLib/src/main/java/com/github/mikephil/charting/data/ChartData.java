@@ -54,6 +54,9 @@ public abstract class ChartData<E extends Entry, T extends IDataSet<E>> {
      */
     protected List<T> mDataSets;
 
+
+    protected boolean calcMinMaxEnabled = true;
+
     /**
      * Default constructor.
      */
@@ -69,6 +72,14 @@ public abstract class ChartData<E extends Entry, T extends IDataSet<E>> {
     public ChartData(T... dataSets) {
         mDataSets = arrayToList(dataSets);
         notifyDataChanged();
+    }
+
+    public boolean isCalcMinMaxEnabled() {
+        return calcMinMaxEnabled;
+    }
+
+    public void setCalcMinMaxEnabled(boolean calcMinMaxEnabled) {
+        this.calcMinMaxEnabled = calcMinMaxEnabled;
     }
 
     /**
@@ -118,6 +129,8 @@ public abstract class ChartData<E extends Entry, T extends IDataSet<E>> {
      * @param toX   the x-value to which the calculation should be performed
      */
     public void calcMinMaxY(float fromX, float toX) {
+        if (!calcMinMaxEnabled)
+            return;
 
         for (T set : mDataSets) {
             set.calcMinMaxY(fromX, toX);
@@ -131,6 +144,9 @@ public abstract class ChartData<E extends Entry, T extends IDataSet<E>> {
      * Calc minimum and maximum values (both x and y) over all DataSets.
      */
     protected void calcMinMax() {
+
+        if (!calcMinMaxEnabled)
+            return;
 
         if (mDataSets == null)
             return;
@@ -455,6 +471,8 @@ public abstract class ChartData<E extends Entry, T extends IDataSet<E>> {
      * @param axis
      */
     protected void calcMinMax(Entry e, AxisDependency axis) {
+        if (!calcMinMaxEnabled)
+            return;
 
         if (mYMax < e.getY())
             mYMax = e.getY();
@@ -486,6 +504,9 @@ public abstract class ChartData<E extends Entry, T extends IDataSet<E>> {
      * @param d
      */
     protected void calcMinMax(T d) {
+        if (!calcMinMaxEnabled)
+            return;
+
 
         if (mYMax < d.getYMax())
             mYMax = d.getYMax();
