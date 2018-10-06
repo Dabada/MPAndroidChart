@@ -35,6 +35,9 @@ android {
 
 buildscript {
     repositories {
+        maven {
+            url 'http://nexus.dscloud.biz/repository/maven-public/'
+        }
         jcenter()
         google()
     }
@@ -47,6 +50,9 @@ buildscript {
 }
 
 repositories {
+    maven {
+        url 'http://nexus.dscloud.biz/repository/maven-public/'
+    }
     maven { url "https://jitpack.io" }
     maven { // this is for realm-db
         url 'http://oss.jfrog.org/artifactory/oss-snapshot-local'

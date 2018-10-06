@@ -1,5 +1,8 @@
 buildscript {
     repositories {
+        maven {
+            url 'http://nexus.dscloud.biz/repository/maven-public/'
+        }
         jcenter()
         google()
     }
@@ -12,6 +15,9 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url 'http://nexus.dscloud.biz/repository/maven-public/'
+        }
         jcenter()
         google()
     }
