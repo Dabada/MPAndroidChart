@@ -7,13 +7,14 @@ import java.text.DecimalFormat;
 /**
  * Created by philipp on 02/06/16.
  */
-public class DefaultAxisValueFormatter implements IAxisValueFormatter
-{
+public class DefaultAxisValueFormatter implements IAxisValueFormatter {
+
+    protected static String decimalBasePattern = ".000000000000000000000";
 
     /**
      * decimalformat for formatting
      */
-    protected DecimalFormat mFormat;
+    protected DecimalFormat mFormat = new DecimalFormat();
 
     /**
      * the number of decimal digits this formatter uses
@@ -28,15 +29,11 @@ public class DefaultAxisValueFormatter implements IAxisValueFormatter
      */
     public DefaultAxisValueFormatter(int digits) {
         this.digits = digits;
+        String decimal = "";
+        if (digits > 0)
+            decimal = decimalBasePattern.substring(0, digits);
 
-        StringBuffer b = new StringBuffer();
-        for (int i = 0; i < digits; i++) {
-            if (i == 0)
-                b.append(".");
-            b.append("0");
-        }
-
-        mFormat = new DecimalFormat("###,###,###,##0" + b.toString());
+        mFormat.applyPattern("###,###,###,##0" + decimal);
     }
 
     @Override
