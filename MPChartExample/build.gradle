@@ -5,7 +5,7 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 56
         versionName '3.0.3'
@@ -31,10 +31,17 @@ android {
     lintOptions {
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 buildscript {
     repositories {
+        maven {
+            url 'http://nexus.dscloud.biz/repository/maven-public/'
+        }
         jcenter()
         google()
     }
@@ -47,6 +54,9 @@ buildscript {
 }
 
 repositories {
+    maven {
+        url 'http://nexus.dscloud.biz/repository/maven-public/'
+    }
     maven { url "https://jitpack.io" }
     maven { // this is for realm-db
         url 'http://oss.jfrog.org/artifactory/oss-snapshot-local'
@@ -57,7 +67,6 @@ dependencies {
     //compile fileTree(dir: 'libs', include: ['*.jar'])
     //compile project(':MPChartLib-Realm') // clone "https://github.com/PhilJay/MPAndroidChart-Realm" to get this or uncomment the gradle dependency below:
     implementation 'com.github.PhilJay:MPAndroidChart-Realm:v2.0.2@aar'
-
     implementation project(':MPChartLib')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     //compile 'io.realm:realm-android:0.87.5' // dependency for realm-database API (http://realm.io)

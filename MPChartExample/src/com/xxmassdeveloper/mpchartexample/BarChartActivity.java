@@ -147,16 +147,17 @@ public class BarChartActivity extends DemoBase implements OnSeekBarChangeListene
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        List<IBarDataSet> dataSets = mChart.getData().getDataSets();
         switch (item.getItemId()) {
             case R.id.actionToggleValues: {
-                for (IDataSet set : mChart.getData().getDataSets())
+                for (IDataSet set : dataSets)
                     set.setDrawValues(!set.isDrawValuesEnabled());
 
                 mChart.invalidate();
                 break;
             }
             case R.id.actionToggleIcons: {
-                for (IDataSet set : mChart.getData().getDataSets())
+                for (IDataSet set : dataSets)
                     set.setDrawIcons(!set.isDrawIconsEnabled());
 
                 mChart.invalidate();
@@ -184,7 +185,7 @@ public class BarChartActivity extends DemoBase implements OnSeekBarChangeListene
                 break;
             }
             case R.id.actionToggleBarBorders: {
-                for (IBarDataSet set : mChart.getData().getDataSets())
+                for (IBarDataSet set : dataSets)
                     ((BarDataSet) set).setBarBorderWidth(set.getBarBorderWidth() == 1.f ? 0.f : 1.f);
 
                 mChart.invalidate();

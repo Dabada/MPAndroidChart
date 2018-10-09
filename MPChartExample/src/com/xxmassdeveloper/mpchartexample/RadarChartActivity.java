@@ -26,6 +26,7 @@ import com.xxmassdeveloper.mpchartexample.custom.RadarMarkerView;
 import com.xxmassdeveloper.mpchartexample.notimportant.DemoBase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RadarChartActivity extends DemoBase {
 
@@ -108,9 +109,10 @@ public class RadarChartActivity extends DemoBase {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        List<IRadarDataSet> dataSets = mChart.getData().getDataSets();
         switch (item.getItemId()) {
             case R.id.actionToggleValues: {
-                for (IDataSet<?> set : mChart.getData().getDataSets())
+                for (IDataSet set : dataSets)
                     set.setDrawValues(!set.isDrawValuesEnabled());
 
                 mChart.invalidate();
@@ -132,11 +134,7 @@ public class RadarChartActivity extends DemoBase {
                 break;
             }
             case R.id.actionToggleFilled: {
-
-                ArrayList<IRadarDataSet> sets = (ArrayList<IRadarDataSet>) mChart.getData()
-                        .getDataSets();
-
-                for (IRadarDataSet set : sets) {
+                for (IRadarDataSet set : dataSets) {
                     if (set.isDrawFilledEnabled())
                         set.setDrawFilled(false);
                     else
@@ -146,11 +144,7 @@ public class RadarChartActivity extends DemoBase {
                 break;
             }
             case R.id.actionToggleHighlightCircle: {
-
-                ArrayList<IRadarDataSet> sets = (ArrayList<IRadarDataSet>) mChart.getData()
-                        .getDataSets();
-
-                for (IRadarDataSet set : sets) {
+                for (IRadarDataSet set : dataSets) {
                     set.setDrawHighlightCircleEnabled(!set.isDrawHighlightCircleEnabled());
                 }
                 mChart.invalidate();

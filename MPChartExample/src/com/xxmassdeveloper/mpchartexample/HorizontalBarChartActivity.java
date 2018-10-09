@@ -124,10 +124,10 @@ public class HorizontalBarChartActivity extends DemoBase implements OnSeekBarCha
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        List<IBarDataSet> dataSets = mChart.getData().getDataSets();
         switch (item.getItemId()) {
             case R.id.actionToggleValues: {
-                List<IBarDataSet> sets = mChart.getData()
-                        .getDataSets();
+                List<IBarDataSet> sets = dataSets;
 
                 for (IBarDataSet iSet : sets) {
 
@@ -139,8 +139,7 @@ public class HorizontalBarChartActivity extends DemoBase implements OnSeekBarCha
                 break;
             }
             case R.id.actionToggleIcons: {
-                List<IBarDataSet> sets = mChart.getData()
-                        .getDataSets();
+                List<IBarDataSet> sets = dataSets;
 
                 for (IBarDataSet iSet : sets) {
 
@@ -173,7 +172,7 @@ public class HorizontalBarChartActivity extends DemoBase implements OnSeekBarCha
                 break;
             }
             case R.id.actionToggleBarBorders: {
-                for (IBarDataSet set : mChart.getData().getDataSets())
+                for (IBarDataSet set : dataSets)
                     ((BarDataSet)set).setBarBorderWidth(set.getBarBorderWidth() == 1.f ? 0.f : 1.f);
 
                 mChart.invalidate();

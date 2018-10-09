@@ -24,7 +24,7 @@ public class PieChartItem extends ChartItem {
     private Typeface mTf;
     private SpannableString mCenterText;
 
-    public PieChartItem(ChartData<?> cd, Context c) {
+    public PieChartItem(ChartData<?, ?> cd, Context c) {
         super(cd);
 
         mTf = Typeface.createFromAsset(c.getAssets(), "OpenSans-Regular.ttf");
@@ -47,7 +47,7 @@ public class PieChartItem extends ChartItem {
 
             convertView = LayoutInflater.from(c).inflate(
                     R.layout.list_item_piechart, null);
-            holder.chart = convertView.findViewById(R.id.chart);
+            holder.chart = (PieChart) convertView.findViewById(R.id.chart);
 
             convertView.setTag(holder);
 

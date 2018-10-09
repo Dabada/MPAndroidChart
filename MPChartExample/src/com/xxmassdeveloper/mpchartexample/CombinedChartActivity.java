@@ -30,11 +30,13 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.ScatterData;
 import com.github.mikephil.charting.data.ScatterDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarLineScatterCandleBubbleDataSet;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.xxmassdeveloper.mpchartexample.notimportant.DemoBase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CombinedChartActivity extends DemoBase {
 
@@ -236,9 +238,10 @@ public class CombinedChartActivity extends DemoBase {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        List<IDataSet> dataSets = mChart.getData().getDataSets();
         switch (item.getItemId()) {
             case R.id.actionToggleLineValues: {
-                for (IDataSet set : mChart.getData().getDataSets()) {
+                for (IDataSet set : dataSets) {
                     if (set instanceof LineDataSet)
                         set.setDrawValues(!set.isDrawValuesEnabled());
                 }
@@ -247,7 +250,7 @@ public class CombinedChartActivity extends DemoBase {
                 break;
             }
             case R.id.actionToggleBarValues: {
-                for (IDataSet set : mChart.getData().getDataSets()) {
+                for (IDataSet set : dataSets) {
                     if (set instanceof BarDataSet)
                         set.setDrawValues(!set.isDrawValuesEnabled());
                 }

@@ -104,9 +104,10 @@ public class CubicLineChartActivity extends DemoBase implements OnSeekBarChangeL
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        List<ILineDataSet> dataSets = mChart.getData().getDataSets();
         switch (item.getItemId()) {
             case R.id.actionToggleValues: {
-                for (IDataSet set : mChart.getData().getDataSets())
+                for (IDataSet set : dataSets)
                     set.setDrawValues(!set.isDrawValuesEnabled());
 
                 mChart.invalidate();
@@ -120,11 +121,7 @@ public class CubicLineChartActivity extends DemoBase implements OnSeekBarChangeL
                 break;
             }
             case R.id.actionToggleFilled: {
-
-                List<ILineDataSet> sets = mChart.getData()
-                        .getDataSets();
-
-                for (ILineDataSet iSet : sets) {
+                for (ILineDataSet iSet : dataSets) {
 
                     LineDataSet set = (LineDataSet) iSet;
 
@@ -137,10 +134,7 @@ public class CubicLineChartActivity extends DemoBase implements OnSeekBarChangeL
                 break;
             }
             case R.id.actionToggleCircles: {
-                List<ILineDataSet> sets = mChart.getData()
-                        .getDataSets();
-
-                for (ILineDataSet iSet : sets) {
+                for (ILineDataSet iSet : dataSets) {
 
                     LineDataSet set = (LineDataSet) iSet;
                     if (set.isDrawCirclesEnabled())
@@ -152,10 +146,7 @@ public class CubicLineChartActivity extends DemoBase implements OnSeekBarChangeL
                 break;
             }
             case R.id.actionToggleCubic: {
-                List<ILineDataSet> sets = mChart.getData()
-                        .getDataSets();
-
-                for (ILineDataSet iSet : sets) {
+                for (ILineDataSet iSet : dataSets) {
 
                     LineDataSet set = (LineDataSet) iSet;
                     set.setMode(set.getMode() == LineDataSet.Mode.CUBIC_BEZIER
@@ -166,10 +157,7 @@ public class CubicLineChartActivity extends DemoBase implements OnSeekBarChangeL
                 break;
             }
             case R.id.actionToggleStepped: {
-                List<ILineDataSet> sets = mChart.getData()
-                        .getDataSets();
-
-                for (ILineDataSet iSet : sets) {
+                for (ILineDataSet iSet : dataSets) {
 
                     LineDataSet set = (LineDataSet) iSet;
                     set.setMode(set.getMode() == LineDataSet.Mode.STEPPED
@@ -180,10 +168,7 @@ public class CubicLineChartActivity extends DemoBase implements OnSeekBarChangeL
                 break;
             }
             case R.id.actionToggleHorizontalCubic: {
-                List<ILineDataSet> sets = mChart.getData()
-                        .getDataSets();
-
-                for (ILineDataSet iSet : sets) {
+                for (ILineDataSet iSet : dataSets) {
 
                     LineDataSet set = (LineDataSet) iSet;
                     set.setMode(set.getMode() == LineDataSet.Mode.HORIZONTAL_BEZIER

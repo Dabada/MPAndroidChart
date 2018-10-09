@@ -25,6 +25,7 @@ import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.xxmassdeveloper.mpchartexample.notimportant.DemoBase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CandleStickChartActivity extends DemoBase implements OnSeekBarChangeListener {
 
@@ -92,16 +93,17 @@ public class CandleStickChartActivity extends DemoBase implements OnSeekBarChang
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        List<ICandleDataSet> dataSets = mChart.getData().getDataSets();
         switch (item.getItemId()) {
             case R.id.actionToggleValues: {
-                for (IDataSet set : mChart.getData().getDataSets())
+                for (IDataSet set : dataSets)
                     set.setDrawValues(!set.isDrawValuesEnabled());
 
                 mChart.invalidate();
                 break;
             }
             case R.id.actionToggleIcons: {
-                for (IDataSet set : mChart.getData().getDataSets())
+                for (IDataSet set : dataSets)
                     set.setDrawIcons(!set.isDrawIconsEnabled());
 
                 mChart.invalidate();
@@ -129,7 +131,7 @@ public class CandleStickChartActivity extends DemoBase implements OnSeekBarChang
                 break;
             }
             case R.id.actionToggleMakeShadowSameColorAsCandle: {
-                for (ICandleDataSet set : mChart.getData().getDataSets()) {
+                for (ICandleDataSet set : dataSets) {
                    //TODO: set.setShadowColorSameAsCandle(!set.getShadowColorSameAsCandle());
                 }
 

@@ -28,9 +28,16 @@ android {
     }
     productFlavors {
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 repositories {
+    maven {
+        url 'http://nexus.dscloud.biz/repository/maven-public/'
+    }
     maven {
         url 'http://oss.jfrog.org/artifactory/oss-snapshot-local'
     }

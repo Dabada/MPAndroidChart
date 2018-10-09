@@ -34,7 +34,7 @@ import java.util.List;
 
 public class StackedBarActivity extends DemoBase implements OnSeekBarChangeListener, OnChartValueSelectedListener {
 
-    private BarChart mChart;
+    private BarChart<?> mChart;
     private SeekBar mSeekBarX, mSeekBarY;
     private TextView tvX, tvY;
 
@@ -44,16 +44,16 @@ public class StackedBarActivity extends DemoBase implements OnSeekBarChangeListe
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_barchart);
 
-        tvX = findViewById(R.id.tvXMax);
-        tvY = findViewById(R.id.tvYMax);
+        tvX = (TextView) findViewById(R.id.tvXMax);
+        tvY = (TextView) findViewById(R.id.tvYMax);
 
-        mSeekBarX = findViewById(R.id.seekBar1);
+        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
         mSeekBarX.setOnSeekBarChangeListener(this);
 
-        mSeekBarY = findViewById(R.id.seekBar2);
+        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
         mSeekBarY.setOnSeekBarChangeListener(this);
 
-        mChart = findViewById(R.id.chart1);
+        mChart = (BarChart<?>) findViewById(R.id.chart1);
         mChart.setOnChartValueSelectedListener(this);
 
         mChart.getDescription().setEnabled(false);
@@ -110,7 +110,7 @@ public class StackedBarActivity extends DemoBase implements OnSeekBarChangeListe
 
         switch (item.getItemId()) {
             case R.id.actionToggleValues: {
-                List<IBarDataSet> sets = mChart.getData()
+                List<? extends IBarDataSet<?>> sets = mChart.getData()
                         .getDataSets();
 
                 for (IBarDataSet iSet : sets) {
@@ -123,7 +123,7 @@ public class StackedBarActivity extends DemoBase implements OnSeekBarChangeListe
                 break;
             }
             case R.id.actionToggleIcons: {
-                List<IBarDataSet> sets = mChart.getData()
+                List<? extends IBarDataSet<?>> sets = mChart.getData()
                         .getDataSets();
 
                 for (IBarDataSet iSet : sets) {

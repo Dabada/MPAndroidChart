@@ -22,6 +22,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.xxmassdeveloper.mpchartexample.notimportant.DemoBase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AnotherBarActivity extends DemoBase implements OnSeekBarChangeListener {
 
@@ -84,10 +85,11 @@ public class AnotherBarActivity extends DemoBase implements OnSeekBarChangeListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        List<IBarDataSet> dataSets = mChart.getData().getDataSets();
         switch (item.getItemId()) {
             case R.id.actionToggleValues: {
 
-                for (IDataSet set : mChart.getData().getDataSets())
+                for (IDataSet set : dataSets)
                     set.setDrawValues(!set.isDrawValuesEnabled());
 
                 mChart.invalidate();
@@ -116,7 +118,7 @@ public class AnotherBarActivity extends DemoBase implements OnSeekBarChangeListe
                 break;
             }
             case R.id.actionToggleBarBorders: {
-                for (IBarDataSet set : mChart.getData().getDataSets())
+                for (IBarDataSet set : dataSets)
                     ((BarDataSet)set).setBarBorderWidth(set.getBarBorderWidth() == 1.f ? 0.f : 1.f);
 
                 mChart.invalidate();

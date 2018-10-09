@@ -29,6 +29,7 @@ import com.github.mikephil.charting.utils.MPPointF;
 import com.xxmassdeveloper.mpchartexample.notimportant.DemoBase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BubbleChartActivity extends DemoBase implements OnSeekBarChangeListener,
         OnChartValueSelectedListener {
@@ -101,16 +102,17 @@ public class BubbleChartActivity extends DemoBase implements OnSeekBarChangeList
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        List<IBubbleDataSet> dataSets = mChart.getData().getDataSets();
         switch (item.getItemId()) {
             case R.id.actionToggleValues: {
-                for (IDataSet set : mChart.getData().getDataSets())
+                for (IDataSet set : dataSets)
                     set.setDrawValues(!set.isDrawValuesEnabled());
 
                 mChart.invalidate();
                 break;
             }
             case R.id.actionToggleIcons: {
-                for (IDataSet set : mChart.getData().getDataSets())
+                for (IDataSet set : dataSets)
                     set.setDrawIcons(!set.isDrawIconsEnabled());
 
                 mChart.invalidate();

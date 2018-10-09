@@ -29,6 +29,7 @@ import com.xxmassdeveloper.mpchartexample.custom.MyMarkerView;
 import com.xxmassdeveloper.mpchartexample.notimportant.DemoBase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BarChartActivityMultiDataset extends DemoBase implements OnSeekBarChangeListener,
         OnChartValueSelectedListener {
@@ -117,9 +118,10 @@ public class BarChartActivityMultiDataset extends DemoBase implements OnSeekBarC
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        List<IBarDataSet> dataSets = mChart.getData().getDataSets();
         switch (item.getItemId()) {
             case R.id.actionToggleValues: {
-                for (IBarDataSet set : mChart.getData().getDataSets())
+                for (IBarDataSet set : dataSets)
                     set.setDrawValues(!set.isDrawValuesEnabled());
 
                 mChart.invalidate();
@@ -140,7 +142,7 @@ public class BarChartActivityMultiDataset extends DemoBase implements OnSeekBarC
                 break;
             }
             case R.id.actionToggleBarBorders: {
-                for (IBarDataSet set : mChart.getData().getDataSets())
+                for (IBarDataSet set : dataSets)
                     ((BarDataSet) set).setBarBorderWidth(set.getBarBorderWidth() == 1.f ? 0.f : 1.f);
 
                 mChart.invalidate();

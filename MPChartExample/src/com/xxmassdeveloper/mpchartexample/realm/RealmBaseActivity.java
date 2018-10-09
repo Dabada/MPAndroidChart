@@ -31,7 +31,7 @@ public abstract class RealmBaseActivity extends DemoBase {
         setTitle("Realm.io Examples");
     }
 
-    protected void setup(Chart<?> chart) {
+    protected void setup(Chart<?, ?> chart) {
 
         mTf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
 

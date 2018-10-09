@@ -30,7 +30,7 @@ public class RealmDatabaseActivityBar extends RealmBaseActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_barchart_noseekbar);
 
-        mChart = findViewById(R.id.chart1);
+        mChart = (BarChart) findViewById(R.id.chart1);
         setup(mChart);
     }
 

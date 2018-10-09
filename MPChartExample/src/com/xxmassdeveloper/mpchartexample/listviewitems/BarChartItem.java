@@ -17,7 +17,7 @@ public class BarChartItem extends ChartItem {
     
     private Typeface mTf;
     
-    public BarChartItem(ChartData<?> cd, Context c) {
+    public BarChartItem(ChartData<?, ?> cd, Context c) {
         super(cd);
 
         mTf = Typeface.createFromAsset(c.getAssets(), "OpenSans-Regular.ttf");
@@ -39,7 +39,7 @@ public class BarChartItem extends ChartItem {
 
             convertView = LayoutInflater.from(c).inflate(
                     R.layout.list_item_barchart, null);
-            holder.chart = convertView.findViewById(R.id.chart);
+            holder.chart = (BarChart) convertView.findViewById(R.id.chart);
 
             convertView.setTag(holder);
 

@@ -10,10 +10,12 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
+import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 
 public class DynamicalAddingActivity extends DemoBase implements OnChartValueSelectedListener {
 
-    private LineChart mChart;
+    private LineChart<?, ?> mChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +51,9 @@ public class DynamicalAddingActivity extends DemoBase implements OnChartValueSel
 
     private void addEntry() {
 
-        LineData data = mChart.getData();
+        ChartData data = mChart.getData();
 
-        ILineDataSet set = data.getDataSetByIndex(0);
+        IDataSet set = data.getDataSetByIndex(0);
         // set.addEntry(...); // can be called as well
 
         if (set == null) {
@@ -79,11 +81,11 @@ public class DynamicalAddingActivity extends DemoBase implements OnChartValueSel
 
     private void removeLastEntry() {
 
-        LineData data = mChart.getData();
+        ChartData data = mChart.getData();
 
         if (data != null) {
 
-            ILineDataSet set = data.getDataSetByIndex(0);
+            IDataSet set = data.getDataSetByIndex(0);
 
             if (set != null) {
 
@@ -101,7 +103,7 @@ public class DynamicalAddingActivity extends DemoBase implements OnChartValueSel
 
     private void addDataSet() {
 
-        LineData data = mChart.getData();
+        ChartData data = mChart.getData();
 
         if (data != null) {
 
@@ -134,7 +136,7 @@ public class DynamicalAddingActivity extends DemoBase implements OnChartValueSel
 
     private void removeDataSet() {
 
-        LineData data = mChart.getData();
+        ChartData data = mChart.getData();
 
         if (data != null) {
 

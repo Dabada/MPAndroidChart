@@ -114,9 +114,10 @@ public class BarChartActivitySinus extends DemoBase implements OnSeekBarChangeLi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        List<IBarDataSet> dataSets = mChart.getData().getDataSets();
         switch (item.getItemId()) {
             case R.id.actionToggleValues: {
-                for (IBarDataSet set : mChart.getData().getDataSets())
+                for (IBarDataSet set : dataSets)
                     set.setDrawValues(!set.isDrawValuesEnabled());
 
                 mChart.invalidate();
@@ -144,7 +145,7 @@ public class BarChartActivitySinus extends DemoBase implements OnSeekBarChangeLi
                 break;
             }
             case R.id.actionToggleBarBorders: {
-                for (IBarDataSet set : mChart.getData().getDataSets())
+                for (IBarDataSet set : dataSets)
                     ((BarDataSet) set).setBarBorderWidth(set.getBarBorderWidth() == 1.f ? 0.f : 1.f);
 
                 mChart.invalidate();
