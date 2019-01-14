@@ -19,7 +19,7 @@ public class DefaultAxisValueFormatter implements IAxisValueFormatter {
     /**
      * the number of decimal digits this formatter uses
      */
-    protected int digits = 0;
+    protected int digits = -1;
 
     /**
      * Constructor that specifies to how many digits the value should be
@@ -31,7 +31,7 @@ public class DefaultAxisValueFormatter implements IAxisValueFormatter {
         this.digits = digits;
         String decimal = "";
         if (digits > 0)
-            decimal = decimalBasePattern.substring(0, digits);
+            decimal = decimalBasePattern.substring(0, digits + 1);
 
         mFormat.applyPattern("###,###,###,##0" + decimal);
     }

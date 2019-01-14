@@ -43,7 +43,7 @@ public class DefaultValueFormatter implements IValueFormatter {
         this.mDecimalDigits = digits;
         String decimal = "";
         if (digits > 0)
-            decimal = decimalBasePattern.substring(0, digits);
+            decimal = decimalBasePattern.substring(0, digits + 1);
 
         mFormat.applyPattern("###,###,###,##0" + decimal);
     }
